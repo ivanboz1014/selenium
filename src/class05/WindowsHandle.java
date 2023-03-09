@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.util.Set;
+
 public class WindowsHandle {
     public static void main(String[] args) {
         System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver.exe");
@@ -18,6 +20,19 @@ public class WindowsHandle {
 
         String parentWindowHandle = driver.getWindowHandle();
         System.out.println(parentWindowHandle);
+
+        Set<String>windowHandles=driver.getWindowHandles();
+        for(String wh:windowHandles){
+            driver.switchTo().window(wh);
+           String title= driver.getTitle();
+           if(title.equalsIgnoreCase("Google Account Help")){
+               break;
+           }
+        }
+        System.out.println(driver.getTitle());
+
+        driver.switchTo().window(parentWindowHandle);
+
 
 
 
